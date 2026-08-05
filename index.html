@@ -6,49 +6,50 @@
 <title>AlphaNet Market Brief — Institutional-Grade Market Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================
    DESIGN SYSTEM — AlphaNet Market Brief
    ============================================ */
 :root {
-  /* Colors — Dark Institutional */
-  --bg-base: #080C16;
-  --bg-primary: #0A0F1C;
-  --bg-secondary: #0F1626;
-  --bg-surface: #131B2E;
-  --bg-elevated: #182238;
-  --bg-hover: #1C2840;
+  /* Colors — matched to alphanet-info article pages */
+  --bg-base: #060608;
+  --bg-primary: #0b0b10;
+  --bg-secondary: #0e0e14;
+  --bg-surface: #0e0e14;
+  --bg-elevated: #141420;
+  --bg-hover: #181820;
 
-  --border-subtle: #1B2740;
-  --border-default: #243150;
-  --border-hover: #3B5277;
+  --border-subtle: rgba(255,255,255,0.08);
+  --border-default: rgba(255,255,255,0.14);
+  --border-hover: rgba(255,255,255,0.22);
 
+  /* Button / accent colors — kept as-is per user request */
   --accent: #60A5FA;
   --accent-hover: #7DB8FC;
   --accent-press: #3B82F6;
   --accent-glow: rgba(96, 165, 250, 0.12);
   --accent-soft: rgba(96, 165, 250, 0.08);
 
-  --success: #4ADE80;
-  --success-soft: rgba(74, 222, 128, 0.1);
-  --warning: #FBBF24;
-  --danger: #F87171;
+  --success: #3ef0b6;
+  --success-soft: rgba(62,240,182,0.12);
+  --warning: #f0b34a;
+  --danger: #ff5470;
 
-  --text-primary: #ECF2FC;
-  --text-secondary: #95A6C2;
-  --text-muted: #5E7090;
-  --text-faint: #3D4A66;
+  --text-primary: #ececf1;
+  --text-secondary: #9b9ba7;
+  --text-muted: #6d6d78;
+  --text-faint: #5a5a65;
 
   /* Category Colors */
   --cat-market: #60A5FA;
-  --cat-strategy: #4ADE80;
+  --cat-strategy: #3ef0b6;
   --cat-product: #C084FC;
 
-  /* Typography */
-  --font-display: 'Plus Jakarta Sans', sans-serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* Typography — matched to article pages */
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* Spacing — 4px base */
   --space-1: 4px;
@@ -138,7 +139,7 @@ img { max-width: 100%; display: block; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(8, 12, 22, 0.8);
+  background: rgba(6, 6, 8, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-subtle);
@@ -960,7 +961,7 @@ img { max-width: 100%; display: block; }
   z-index: 1;
 }
 .blog-card-cover[data-cat="strategy"] {
-  background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(74, 222, 128, 0.02));
+  background: linear-gradient(135deg, rgba(62,240,182,0.1), rgba(62,240,182,0.02));
 }
 .blog-card-cover[data-cat="strategy"] .blog-card-cover-visual { color: var(--success); opacity: 0.5; }
 .blog-card-cover[data-cat="market"] {
@@ -1069,8 +1070,8 @@ img { max-width: 100%; display: block; }
 .follow-icon-btn.telegram:hover { background: rgba(36, 161, 222, 0.25); }
 .follow-icon-btn.x { background: rgba(255, 255, 255, 0.08); color: var(--text-primary); border-color: rgba(255, 255, 255, 0.15); }
 .follow-icon-btn.x:hover { background: rgba(255, 255, 255, 0.15); }
-.follow-icon-btn.medium { background: rgba(74, 222, 128, 0.12); color: var(--success); border-color: rgba(74, 222, 128, 0.2); }
-.follow-icon-btn.medium:hover { background: rgba(74, 222, 128, 0.2); }
+.follow-icon-btn.medium { background: rgba(62,240,182, 0.12); color: var(--success); border-color: rgba(62,240,182, 0.2); }
+.follow-icon-btn.medium:hover { background: rgba(62,240,182, 0.2); }
 .follow-icon-btn.reddit { background: rgba(255, 86, 0, 0.12); color: #FF5600; border-color: rgba(255, 86, 0, 0.2); }
 .follow-icon-btn.reddit:hover { background: rgba(255, 86, 0, 0.2); }
 
