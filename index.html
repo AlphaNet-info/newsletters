@@ -1733,23 +1733,34 @@ let currentPage = 1;
 
 function renderPagination() {
   const cards = Array.from(document.querySelectorAll('.blog-card'));
-  const visibleCards = cards.filter(c => c.style.display !== 'none');
-  const totalPages = Math.ceil(visibleCards.length / PER_PAGE);
+  // Determine filter-visible cards: check active filter button
+  const activeFilter = document.querySelector('.filter-btn.active');
+  const filterVal = activeFilter ? activeFilter.dataset.filter : 'all';
+  const filterVisible = cards.filter(c => filterVal === 'all' || c.dataset.category === filterVal);
+  const totalPages = Math.ceil(filterVisible.length / PER_PAGE);
 
-  // If only 1 page, hide pagination
+  // If only 1 page, hide pagination and show all filter-visible cards
   if (totalPages <= 1) {
     paginationEl.style.display = 'none';
-    // Make sure all cards are visible
-    cards.forEach(c => { if (c.style.display === 'none') c.style.display = ''; });
+    cards.forEach(c => {
+      const matchFilter = filterVal === 'all' || c.dataset.category === filterVal;
+      c.style.display = matchFilter ? '' : 'none';
+    });
     return;
   }
   paginationEl.style.display = 'flex';
 
-  // Show only current page's cards
+  // Show only current page's cards (within filter-visible set)
   const start = (currentPage - 1) * PER_PAGE;
   const end = start + PER_PAGE;
-  visibleCards.forEach((card, i) => {
-    card.style.display = (i >= start && i < end) ? '' : 'none';
+  cards.forEach(c => {
+    const matchFilter = filterVal === 'all' || c.dataset.category === filterVal;
+    if (!matchFilter) {
+      c.style.display = 'none';
+      return;
+    }
+    const idx = filterVisible.indexOf(c);
+    c.style.display = (idx >= start && idx < end) ? '' : 'none';
   });
 
   // Build pagination buttons
