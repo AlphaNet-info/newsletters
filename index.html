@@ -928,6 +928,9 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   overflow: hidden;
   min-height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg-surface);
 }
 .blog-card-cover::before {
   content: '';
@@ -938,6 +941,15 @@ img { max-width: 100%; display: block; }
     linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
   background-size: 24px 24px;
   opacity: 0.25;
+}
+.blog-card-cover[data-cover]:not([data-cover=""])::before {
+  display: none;
+}
+.blog-card-cover[data-cover]:not([data-cover=""])::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(8, 12, 22, 0.15), rgba(8, 12, 22, 0.45));
 }
 .blog-card-cover-visual {
   position: relative;
@@ -1359,8 +1371,7 @@ img { max-width: 100%; display: block; }
 
           <!-- Card 1 -->
           <article class="blog-card" data-category="market" data-href="https://alphanet-info.github.io/439-margin-call/">
-            <div class="blog-card-cover" data-cat="market">
-              <span class="blog-card-cover-visual">α</span>
+            <div class="blog-card-cover" data-cat="market" data-cover="1" style="background-image: url('blog-covers/cover-1-margin-call.png');">
             </div>
             <div class="blog-card-content">
               <div class="blog-card-meta">
@@ -1380,8 +1391,7 @@ img { max-width: 100%; display: block; }
 
           <!-- Card 2 -->
           <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/Strategy_Spotlight_Prime_DOGE/">
-            <div class="blog-card-cover" data-cat="strategy">
-              <span class="blog-card-cover-visual">α</span>
+            <div class="blog-card-cover" data-cat="strategy" data-cover="2" style="background-image: url('blog-covers/cover-2-prime-doge.png');">
             </div>
             <div class="blog-card-content">
               <div class="blog-card-meta">
@@ -1401,8 +1411,7 @@ img { max-width: 100%; display: block; }
 
           <!-- Card 4 -->
           <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/Korea-Volatility/">
-            <div class="blog-card-cover" data-cat="market">
-              <span class="blog-card-cover-visual">α</span>
+            <div class="blog-card-cover" data-cat="market" data-cover="3" style="background-image: url('blog-covers/cover-3-vs-machines.png');">
             </div>
             <div class="blog-card-content">
               <div class="blog-card-meta">
@@ -1422,8 +1431,7 @@ img { max-width: 100%; display: block; }
 
           <!-- Card 5 -->
           <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/June-OptimaShort-Casestudy/">
-            <div class="blog-card-cover" data-cat="strategy">
-              <span class="blog-card-cover-visual">α</span>
+            <div class="blog-card-cover" data-cat="strategy" data-cover="4" style="background-image: url('blog-covers/cover-4-june-optima.png');">
             </div>
             <div class="blog-card-content">
               <div class="blog-card-meta">
@@ -1443,8 +1451,7 @@ img { max-width: 100%; display: block; }
 
           <!-- Card 6 -->
           <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/06-05-event-analysis/">
-            <div class="blog-card-cover" data-cat="strategy">
-              <span class="blog-card-cover-visual">α</span>
+            <div class="blog-card-cover" data-cat="strategy" data-cover="5" style="background-image: url('blog-covers/cover-5-privacy-crisis.png');">
             </div>
             <div class="blog-card-content">
               <div class="blog-card-meta">
@@ -1464,8 +1471,7 @@ img { max-width: 100%; display: block; }
 
           <!-- Card 7 -->
           <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/MarketEventAnalysis/">
-            <div class="blog-card-cover" data-cat="strategy">
-              <span class="blog-card-cover-visual">α</span>
+            <div class="blog-card-cover" data-cat="strategy" data-cover="6" style="background-image: url('blog-covers/cover-6-market-dump.png');">
             </div>
             <div class="blog-card-content">
               <div class="blog-card-meta">
@@ -1485,8 +1491,7 @@ img { max-width: 100%; display: block; }
 
           <!-- Card 8 -->
           <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/Newsletter/">
-            <div class="blog-card-cover" data-cat="strategy">
-              <span class="blog-card-cover-visual">α</span>
+            <div class="blog-card-cover" data-cat="strategy" data-cover="7" style="background-image: url('blog-covers/cover-7-may-snapshot.png');">
             </div>
             <div class="blog-card-content">
               <div class="blog-card-meta">
