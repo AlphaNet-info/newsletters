@@ -859,6 +859,53 @@ img { max-width: 100%; display: block; }
    ============================================ */
 .blog-list { display: flex; flex-direction: column; gap: var(--space-5); }
 
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+}
+.pagination-btn {
+  min-width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-3);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--dur) var(--ease);
+}
+.pagination-btn:hover:not(:disabled):not(.active) {
+  border-color: var(--border-default);
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+.pagination-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.pagination-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.pagination-dots {
+  color: var(--text-muted);
+  padding: 0 var(--space-1);
+  user-select: none;
+}
+
 .blog-card {
   display: grid;
   grid-template-columns: 200px 1fr;
@@ -1311,6 +1358,27 @@ img { max-width: 100%; display: block; }
         <div class="blog-list" id="archive">
 
           <!-- Card 1 -->
+          <article class="blog-card" data-category="market" data-href="https://alphanet-info.github.io/439-margin-call/">
+            <div class="blog-card-cover" data-cat="market">
+              <span class="blog-card-cover-visual">α</span>
+            </div>
+            <div class="blog-card-content">
+              <div class="blog-card-meta">
+                <span class="cat-tag cat-market">Market Brief</span>
+                <span class="blog-card-date">Aug 2, 2026</span>
+              </div>
+              <h3 class="blog-card-title">The 439% Margin Call</h3>
+              <p class="blog-card-excerpt">The best-performing large fund in the world — up 439% net in H1 — was forced to sell $16 billion of stock in 24 hours. The best trade of the week required no opinion about AI at all.</p>
+              <div class="blog-card-footer">
+                <span class="blog-card-read">12 min read</span>
+                <div class="blog-card-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
           <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/Strategy_Spotlight_Prime_DOGE/">
             <div class="blog-card-cover" data-cat="strategy">
               <span class="blog-card-cover-visual">α</span>
@@ -1331,8 +1399,8 @@ img { max-width: 100%; display: block; }
             </div>
           </article>
 
-          <!-- Card 2 -->
-          <article class="blog-card" data-category="market" data-href="https://alphanet-info.github.io/Korea-Volatility/">
+          <!-- Card 4 -->
+          <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/Korea-Volatility/">
             <div class="blog-card-cover" data-cat="market">
               <span class="blog-card-cover-visual">α</span>
             </div>
@@ -1352,7 +1420,7 @@ img { max-width: 100%; display: block; }
             </div>
           </article>
 
-          <!-- Card 3 -->
+          <!-- Card 5 -->
           <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/June-OptimaShort-Casestudy/">
             <div class="blog-card-cover" data-cat="strategy">
               <span class="blog-card-cover-visual">α</span>
@@ -1373,7 +1441,7 @@ img { max-width: 100%; display: block; }
             </div>
           </article>
 
-          <!-- Card 4 -->
+          <!-- Card 6 -->
           <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/06-05-event-analysis/">
             <div class="blog-card-cover" data-cat="strategy">
               <span class="blog-card-cover-visual">α</span>
@@ -1394,7 +1462,7 @@ img { max-width: 100%; display: block; }
             </div>
           </article>
 
-          <!-- Card 5 -->
+          <!-- Card 7 -->
           <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/MarketEventAnalysis/">
             <div class="blog-card-cover" data-cat="strategy">
               <span class="blog-card-cover-visual">α</span>
@@ -1415,7 +1483,7 @@ img { max-width: 100%; display: block; }
             </div>
           </article>
 
-          <!-- Card 6 -->
+          <!-- Card 8 -->
           <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/Newsletter/">
             <div class="blog-card-cover" data-cat="strategy">
               <span class="blog-card-cover-visual">α</span>
@@ -1437,6 +1505,10 @@ img { max-width: 100%; display: block; }
           </article>
 
         </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination"></div>
+
       </div>
 
       <!-- Sidebar -->
@@ -1619,6 +1691,78 @@ if (mobileToggle) {
     navLinks.style.borderBottom = '1px solid var(--border-subtle)';
   });
 }
+
+// ============================================
+// PAGINATION (10 per page)
+// ============================================
+const PER_PAGE = 10;
+const paginationEl = document.getElementById('pagination');
+let currentPage = 1;
+
+function renderPagination() {
+  const cards = Array.from(document.querySelectorAll('.blog-card'));
+  const visibleCards = cards.filter(c => c.style.display !== 'none');
+  const totalPages = Math.ceil(visibleCards.length / PER_PAGE);
+
+  // If only 1 page, hide pagination
+  if (totalPages <= 1) {
+    paginationEl.style.display = 'none';
+    // Make sure all cards are visible
+    cards.forEach(c => { if (c.style.display === 'none') c.style.display = ''; });
+    return;
+  }
+  paginationEl.style.display = 'flex';
+
+  // Show only current page's cards
+  const start = (currentPage - 1) * PER_PAGE;
+  const end = start + PER_PAGE;
+  visibleCards.forEach((card, i) => {
+    card.style.display = (i >= start && i < end) ? '' : 'none';
+  });
+
+  // Build pagination buttons
+  let html = '';
+  // Prev button
+  html += `<button class="pagination-btn" data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''}>&laquo;</button>`;
+
+  // Page numbers with ellipsis logic
+  for (let p = 1; p <= totalPages; p++) {
+    if (p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1) {
+      html += `<button class="pagination-btn ${p === currentPage ? 'active' : ''}" data-page="${p}">${p}</button>`;
+    } else if (p === 2 || p === totalPages - 1) {
+      html += `<span class="pagination-dots">...</span>`;
+    }
+  }
+
+  // Next button
+  html += `<button class="pagination-btn" data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''}>&raquo;</button>`;
+
+  paginationEl.innerHTML = html;
+
+  // Bind click events
+  paginationEl.querySelectorAll('.pagination-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const page = parseInt(btn.dataset.page);
+      if (page >= 1 && page <= totalPages) {
+        currentPage = page;
+        renderPagination();
+        // Scroll to archive top
+        document.getElementById('archive').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+}
+
+// Initial render
+renderPagination();
+
+// Re-render pagination when category filter changes
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentPage = 1;
+    setTimeout(renderPagination, 50);
+  });
+});
 </script>
 
 </body>
