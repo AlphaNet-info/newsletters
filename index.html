@@ -805,6 +805,285 @@ img { max-width: 100%; display: block; }
 .issue-card-arrow svg { width: 14px; height: 14px; }
 
 /* ============================================
+   BLOG PAGE HEADER
+   ============================================ */
+.blog-page {
+  padding-top: 120px;
+  padding-bottom: var(--space-16);
+}
+.blog-page-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-8);
+  align-items: start;
+  margin-bottom: var(--space-10);
+}
+.blog-page-header-left { min-width: 0; }
+.blog-page-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+.blog-page-desc {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+.blog-header-follow {
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+/* ============================================
+   BLOG LAYOUT — Two Column (CoinEx style)
+   ============================================ */
+.blog-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--space-10);
+  align-items: start;
+}
+.blog-main { min-width: 0; }
+.blog-sidebar {
+  position: sticky;
+  top: 88px;
+}
+
+/* ============================================
+   BLOG LIST — Horizontal Cards
+   ============================================ */
+.blog-list { display: flex; flex-direction: column; gap: var(--space-5); }
+
+.blog-card {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  cursor: pointer;
+}
+.blog-card:hover {
+  border-color: var(--border-default);
+  transform: translateY(-2px);
+}
+.blog-card-cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 100%;
+}
+.blog-card-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.25;
+}
+.blog-card-cover-visual {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 42px;
+  font-weight: 700;
+  z-index: 1;
+}
+.blog-card-cover[data-cat="strategy"] {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(74, 222, 128, 0.02));
+}
+.blog-card-cover[data-cat="strategy"] .blog-card-cover-visual { color: var(--success); opacity: 0.5; }
+.blog-card-cover[data-cat="market"] {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(96, 165, 250, 0.02));
+}
+.blog-card-cover[data-cat="market"] .blog-card-cover-visual { color: var(--accent); opacity: 0.5; }
+
+.blog-card-content {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+}
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.blog-card-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.blog-card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  transition: color var(--dur) var(--ease);
+}
+.blog-card:hover .blog-card-title { color: var(--accent); }
+.blog-card-excerpt {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.blog-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.blog-card-read {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.blog-card-arrow {
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  transition: all var(--dur) var(--ease);
+}
+.blog-card:hover .blog-card-arrow {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.blog-card-arrow svg { width: 14px; height: 14px; }
+
+/* ============================================
+   FOLLOW US SIDEBAR
+   ============================================ */
+.follow-section {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6);
+}
+.follow-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+.follow-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.follow-icon-btn {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.follow-icon-btn svg { width: 18px; height: 18px; }
+.follow-icon-btn:hover { transform: translateY(-2px); }
+.follow-icon-btn.telegram { background: rgba(36, 161, 222, 0.15); color: #24A1DE; border-color: rgba(36, 161, 222, 0.25); }
+.follow-icon-btn.telegram:hover { background: rgba(36, 161, 222, 0.25); }
+.follow-icon-btn.x { background: rgba(255, 255, 255, 0.08); color: var(--text-primary); border-color: rgba(255, 255, 255, 0.15); }
+.follow-icon-btn.x:hover { background: rgba(255, 255, 255, 0.15); }
+.follow-icon-btn.medium { background: rgba(74, 222, 128, 0.12); color: var(--success); border-color: rgba(74, 222, 128, 0.2); }
+.follow-icon-btn.medium:hover { background: rgba(74, 222, 128, 0.2); }
+.follow-icon-btn.reddit { background: rgba(255, 86, 0, 0.12); color: #FF5600; border-color: rgba(255, 86, 0, 0.2); }
+.follow-icon-btn.reddit:hover { background: rgba(255, 86, 0, 0.2); }
+
+/* ============================================
+   SIDEBAR SECTIONS (Subscribe + Join Community)
+   ============================================ */
+.sidebar-section {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+.blog-sidebar { display: flex; flex-direction: column; gap: var(--space-5); }
+
+.sidebar-section-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.sidebar-subscribe-text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+.sidebar-subscribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.sidebar-subscribe-form .subscribe-input {
+  width: 100%;
+  min-width: 0;
+}
+.sidebar-subscribe-form .subscribe-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.sidebar-join-text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+.sidebar-join-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: var(--bg-base);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.sidebar-join-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+/* ============================================
    BOTTOM CTA
    ============================================ */
 .cta-section {
@@ -922,6 +1201,13 @@ img { max-width: 100%; display: block; }
   .featured-visual { border-left: none; border-top: 1px solid var(--border-subtle); min-height: 280px; }
   .archive-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .blog-layout { grid-template-columns: 1fr; }
+  .blog-sidebar { position: static; }
+  .blog-page-header { grid-template-columns: 1fr; }
+  .blog-header-follow { width: 100%; }
+  .follow-list { justify-content: flex-start; flex-wrap: wrap; }
+  .sidebar-subscribe-form,
+  .sidebar-join-btn { max-width: 360px; }
 }
 
 @media (max-width: 640px) {
@@ -938,6 +1224,10 @@ img { max-width: 100%; display: block; }
   .subscribe-input, .subscribe-btn, .cta-form .subscribe-input, .cta-form .subscribe-btn { width: 100%; }
   .archive-grid { grid-template-columns: 1fr; }
   .featured-content { padding: var(--space-6); }
+  .blog-card { grid-template-columns: 1fr; }
+  .blog-card-cover { min-height: 100px; }
+  .blog-card-cover-visual { font-size: 32px; }
+  .blog-header-follow { width: 100%; }
   .featured-stats { flex-wrap: wrap; gap: var(--space-4); }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: var(--space-3); text-align: center; }
@@ -974,237 +1264,207 @@ img { max-width: 100%; display: block; }
   </div>
 </nav>
 
-<!-- ============================================ HERO ============================================ -->
-<header class="hero">
+<!-- ============================================ BLOG PAGE ============================================ -->
+<section class="blog-page">
   <div class="container">
-    <div class="hero-grid">
-      <!-- Left -->
-      <div class="hero-left">
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          New Issue · July 2026
-        </div>
-        <h1 class="hero-title">
-          The machinery of institutional trading, <em>delivered to your inbox.</em>
-        </h1>
-        <p class="hero-desc">
-          AlphaNet Market Brief breaks down the quantitative edge — market dissection, strategy performance, and the architecture behind institutional-grade alpha. Written by the team building it.
+    <!-- Blog Header -->
+    <div class="blog-page-header">
+      <div class="blog-page-header-left">
+        <h1 class="blog-page-title">AlphaNet Blog</h1>
+        <p class="blog-page-desc">
+          Institutional-grade quantitative AI trading intelligence, market dissection, and strategy performance reports — delivered to your inbox. Written by the team building it.
         </p>
-        <form class="subscribe-form" id="hero-subscribe">
-          <input type="email" class="subscribe-input" placeholder="your@email.com" required aria-label="Email address">
-          <button type="submit" class="subscribe-btn">
-            Subscribe
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </button>
-        </form>
-        <div class="hero-meta">
-          <div class="hero-meta-item">Free forever</div>
-          <div class="hero-meta-dot"></div>
-          <div class="hero-meta-item">Bi-weekly</div>
-          <div class="hero-meta-dot"></div>
-          <div class="hero-meta-item">No spam, ever</div>
-        </div>
       </div>
-
-      <!-- Right — Data Panel -->
-      <div class="hero-right">
-        <div class="data-panel">
-          <div class="data-panel-header">
-            <span class="data-panel-title">Strategy Leaderboard</span>
-            <span class="data-panel-live">LIVE</span>
-          </div>
-          <div class="data-panel-body">
-            <!-- Key Metrics -->
-            <div class="metric-row">
-              <div class="metric-cell">
-                <div class="metric-value positive">176%</div>
-                <div class="metric-label">Avg Annual Return</div>
-              </div>
-              <div class="metric-cell">
-                <div class="metric-value">2.56</div>
-                <div class="metric-label">Avg Sharpe</div>
-              </div>
-              <div class="metric-cell">
-                <div class="metric-value">45+</div>
-                <div class="metric-label">Strategies</div>
-              </div>
-            </div>
-
-            <!-- Strategy Mini Table -->
-            <div class="strategy-mini">
-              <div class="strategy-mini-head">
-                <span>Strategy</span>
-                <span>30D ROI</span>
-                <span>Sharpe</span>
-                <span>Max DD</span>
-              </div>
-              <div class="strategy-mini-row">
-                <span class="strategy-name">HW OptimaShort · DOGE</span>
-                <span class="strategy-roi">+32.8%</span>
-                <span class="strategy-sharpe">3.46</span>
-                <span class="strategy-dd">3.40%</span>
-              </div>
-              <div class="strategy-mini-row">
-                <span class="strategy-name">HW OptimaShort · ADA</span>
-                <span class="strategy-roi">+14.9%</span>
-                <span class="strategy-sharpe">2.43</span>
-                <span class="strategy-dd">6.50%</span>
-              </div>
-              <div class="strategy-mini-row">
-                <span class="strategy-name">HW OptimaShort · SOL</span>
-                <span class="strategy-roi">+13.5%</span>
-                <span class="strategy-sharpe">3.18</span>
-                <span class="strategy-dd">2.50%</span>
-              </div>
-              <div class="strategy-mini-row">
-                <span class="strategy-name">HW OptimaShort · LINK</span>
-                <span class="strategy-roi">+9.7%</span>
-                <span class="strategy-sharpe">2.60</span>
-                <span class="strategy-dd">6.10%</span>
-              </div>
-            </div>
-
-            <!-- Sparkline -->
-            <div class="sparkline-section">
-              <div class="sparkline-label">
-                <span class="sparkline-name">DOGE · OptimaShort V2 — 90D Equity Curve</span>
-                <span class="sparkline-value">+1,876.7%</span>
-              </div>
-              <svg class="sparkline-svg" viewBox="0 0 300 48" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#4ADE80" stop-opacity="0.3"/>
-                    <stop offset="100%" stop-color="#4ADE80" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <path d="M0,38 L15,36 L30,34 L45,35 L60,30 L75,28 L90,31 L105,24 L120,26 L135,20 L150,22 L165,16 L180,18 L195,12 L210,14 L225,8 L240,10 L255,6 L270,7 L285,4 L300,3 L300,48 L0,48 Z" fill="url(#sparkGrad)"/>
-                <path d="M0,38 L15,36 L30,34 L45,35 L60,30 L75,28 L90,31 L105,24 L120,26 L135,20 L150,22 L165,16 L180,18 L195,12 L210,14 L225,8 L240,10 L255,6 L270,7 L285,4 L300,3" fill="none" stroke="#4ADE80" stroke-width="1.5"/>
-              </svg>
-            </div>
+      <!-- Follow Us (parallel with title) -->
+      <div class="blog-header-follow">
+        <div class="sidebar-section follow-section">
+          <h3 class="sidebar-section-title">Follow Us</h3>
+          <div class="follow-list">
+            <a href="https://t.me/AlphaNet_AI" class="follow-icon-btn telegram" target="_blank" rel="noopener" aria-label="Telegram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </a>
+            <a href="https://x.com/AlphaNet_AI" class="follow-icon-btn x" target="_blank" rel="noopener" aria-label="X (Twitter)">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" class="follow-icon-btn medium" target="_blank" rel="noopener" aria-label="Medium">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42z"/></svg>
+            </a>
+            <a href="#" class="follow-icon-btn reddit" target="_blank" rel="noopener" aria-label="Reddit">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.07 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+            </a>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</header>
 
-<!-- ============================================ ARCHIVE ============================================ -->
-<section class="section archive" id="archive">
-  <div class="container">
-    <div class="section-header" id="categories">
-      <div class="section-title-group">
-        <span class="eyebrow">Archive</span>
-        <h2>Every issue, indexed</h2>
-        <p>Market dissection, strategy performance, and product deep-dives. Filter by what matters to you.</p>
+    <!-- Two-Column Layout -->
+    <div class="blog-layout">
+      <!-- Main: Blog List -->
+      <div class="blog-main">
+        <!-- Filter Bar -->
+        <div class="filter-bar" id="categories">
+          <button class="filter-btn active" data-filter="all">All <span class="filter-btn-count">6</span></button>
+          <button class="filter-btn" data-filter="market">Market Brief <span class="filter-btn-count">1</span></button>
+          <button class="filter-btn" data-filter="strategy">Strategy Reports <span class="filter-btn-count">5</span></button>
+        </div>
+
+        <!-- Blog Cards -->
+        <div class="blog-list" id="archive">
+
+          <!-- Card 1 -->
+          <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/Strategy_Spotlight_Prime_DOGE/">
+            <div class="blog-card-cover" data-cat="strategy">
+              <span class="blog-card-cover-visual">α</span>
+            </div>
+            <div class="blog-card-content">
+              <div class="blog-card-meta">
+                <span class="cat-tag cat-strategy">Strategy Report</span>
+                <span class="blog-card-date">Jul 27, 2026</span>
+              </div>
+              <h3 class="blog-card-title">Strategy Spotlight: Hackworth Prime × DOGE</h3>
+              <p class="blog-card-excerpt">DOGE fell 29.8% in two months. Prime returned +14.2% through both the crash and the flatline — 4.0 Sharpe, −4.7% max drawdown, recovered in 7 days.</p>
+              <div class="blog-card-footer">
+                <span class="blog-card-read">10 min read</span>
+                <div class="blog-card-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="blog-card" data-category="market" data-href="https://alphanet-info.github.io/Korea-Volatility/">
+            <div class="blog-card-cover" data-cat="market">
+              <span class="blog-card-cover-visual">α</span>
+            </div>
+            <div class="blog-card-content">
+              <div class="blog-card-meta">
+                <span class="cat-tag cat-market">Market Brief</span>
+                <span class="blog-card-date">Jul 13, 2026</span>
+              </div>
+              <h3 class="blog-card-title">Stop Trading Against Machines. Start Trading With One.</h3>
+              <p class="blog-card-excerpt">When SK Hynix dropped 15%, retail sold ₩4.15T at the lows. Institutions bought ₩4.2T. The lesson isn't about the stock — it's about the machinery.</p>
+              <div class="blog-card-footer">
+                <span class="blog-card-read">8 min read</span>
+                <div class="blog-card-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/June-OptimaShort-Casestudy/">
+            <div class="blog-card-cover" data-cat="strategy">
+              <span class="blog-card-cover-visual">α</span>
+            </div>
+            <div class="blog-card-content">
+              <div class="blog-card-meta">
+                <span class="cat-tag cat-strategy">Strategy Report</span>
+                <span class="blog-card-date">Jul 10, 2026</span>
+              </div>
+              <h3 class="blog-card-title">Hackworth OptimaShort: June Performance Report</h3>
+              <p class="blog-card-excerpt">Four previously under-the-radar strategies broke out in June. DOGE led with +32.8% ROI and a 3.46 Sharpe. All four delivered positive PnL across the cohort.</p>
+              <div class="blog-card-footer">
+                <span class="blog-card-read">12 min read</span>
+                <div class="blog-card-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/06-05-event-analysis/">
+            <div class="blog-card-cover" data-cat="strategy">
+              <span class="blog-card-cover-visual">α</span>
+            </div>
+            <div class="blog-card-content">
+              <div class="blog-card-meta">
+                <span class="cat-tag cat-strategy">Strategy Report</span>
+                <span class="blog-card-date">Jun 6, 2026</span>
+              </div>
+              <h3 class="blog-card-title">Privacy Coin Crisis: OptimaShort Stress Test</h3>
+              <p class="blog-card-excerpt">ZEC crashed 56% in two days as a Zcash shielded-pool vulnerability triggered the worst privacy-sector selloff in years. OptimaShort converted the chaos into net profit on both ZEC and XMR.</p>
+              <div class="blog-card-footer">
+                <span class="blog-card-read">10 min read</span>
+                <div class="blog-card-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/MarketEventAnalysis/">
+            <div class="blog-card-cover" data-cat="strategy">
+              <span class="blog-card-cover-visual">α</span>
+            </div>
+            <div class="blog-card-content">
+              <div class="blog-card-meta">
+                <span class="cat-tag cat-strategy">Strategy Report</span>
+                <span class="blog-card-date">Jun 5, 2026</span>
+              </div>
+              <h3 class="blog-card-title">Market Dump Response: 6 Strategies, 102 Trades</h3>
+              <p class="blog-card-excerpt">How six Hackworth Prime strategies navigated the June 1–3 downturn. Four posted positive returns — ZEC led at +8.83%, and five strategies went short simultaneously at the cascade.</p>
+              <div class="blog-card-footer">
+                <span class="blog-card-read">14 min read</span>
+                <div class="blog-card-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="blog-card" data-category="strategy" data-href="https://alphanet-info.github.io/Newsletter/">
+            <div class="blog-card-cover" data-cat="strategy">
+              <span class="blog-card-cover-visual">α</span>
+            </div>
+            <div class="blog-card-content">
+              <div class="blog-card-meta">
+                <span class="cat-tag cat-strategy">Strategy Report</span>
+                <span class="blog-card-date">Jun 1, 2026</span>
+              </div>
+              <h3 class="blog-card-title">May 2026 Snapshot: Six Spotlight Strategies</h3>
+              <p class="blog-card-excerpt">All six Hackworth spotlight strategies posted positive May returns, led by Prime ZEC at +20.3%. ~1,050 trades executed. A full technical breakdown of the engine architecture behind the results.</p>
+              <div class="blog-card-footer">
+                <span class="blog-card-read">15 min read</span>
+                <div class="blog-card-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
       </div>
-    </div>
 
-    <!-- Filter Bar -->
-    <div class="filter-bar">
-      <button class="filter-btn active" data-filter="all">All <span class="filter-btn-count">6</span></button>
-      <button class="filter-btn" data-filter="market">Market Brief <span class="filter-btn-count">1</span></button>
-      <button class="filter-btn" data-filter="strategy">Strategy Reports <span class="filter-btn-count">5</span></button>
-    </div>
+      <!-- Sidebar -->
+      <aside class="blog-sidebar">
+        <!-- Subscribe -->
+        <div class="sidebar-section sidebar-subscribe">
+          <h3 class="sidebar-section-title">Subscribe</h3>
+          <p class="sidebar-subscribe-text">Get the latest AlphaNet research, strategy reports, and market briefs delivered straight to your inbox.</p>
+          <form class="sidebar-subscribe-form" id="sidebar-subscribe">
+            <input type="email" class="subscribe-input" placeholder="your@email.com" required aria-label="Email address">
+            <button type="submit" class="subscribe-btn">
+              Subscribe
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
+          </form>
+        </div>
 
-    <!-- Grid -->
-    <div class="archive-grid">
-
-      <!-- Card 1 -->
-      <article class="issue-card" data-category="strategy" data-href="https://alphanet-info.github.io/Strategy_Spotlight_Prime_DOGE/">
-        <div class="issue-card-meta">
-          <span class="cat-tag cat-strategy">Strategy Report</span>
-          <span class="issue-card-date">Jul 27, 2026</span>
+        <!-- Join Our Community -->
+        <div class="sidebar-section sidebar-join">
+          <h3 class="sidebar-section-title">Join Our Community</h3>
+          <p class="sidebar-join-text">Discuss quant strategies, market events, and platform updates with the AlphaNet team and other traders.</p>
+          <a href="https://t.me/AlphaNet_AI" class="sidebar-join-btn" target="_blank" rel="noopener">
+            Join Now
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
         </div>
-        <h3 class="issue-card-title">Strategy Spotlight: Hackworth Prime × DOGE</h3>
-        <p class="issue-card-excerpt">DOGE fell 29.8% in two months. Prime returned +14.2% through both the crash and the flatline — 4.0 Sharpe, −4.7% max drawdown, recovered in 7 days.</p>
-        <div class="issue-card-footer">
-          <span class="issue-card-read">10 min read</span>
-          <div class="issue-card-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 2 -->
-      <article class="issue-card" data-category="market" data-href="https://alphanet-info.github.io/Korea-Volatility/">
-        <div class="issue-card-meta">
-          <span class="cat-tag cat-market">Market Brief</span>
-          <span class="issue-card-date">Jul 13, 2026</span>
-        </div>
-        <h3 class="issue-card-title">Stop Trading Against Machines. Start Trading With One.</h3>
-        <p class="issue-card-excerpt">When SK Hynix dropped 15%, retail sold ₩4.15T at the lows. Institutions bought ₩4.2T. The lesson isn't about the stock — it's about the machinery.</p>
-        <div class="issue-card-footer">
-          <span class="issue-card-read">8 min read</span>
-          <div class="issue-card-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 2 -->
-      <article class="issue-card" data-category="strategy" data-href="https://alphanet-info.github.io/June-OptimaShort-Casestudy/">
-        <div class="issue-card-meta">
-          <span class="cat-tag cat-strategy">Strategy Report</span>
-          <span class="issue-card-date">Jul 10, 2026</span>
-        </div>
-        <h3 class="issue-card-title">Hackworth OptimaShort: June Performance Report</h3>
-        <p class="issue-card-excerpt">Four previously under-the-radar strategies broke out in June. DOGE led with +32.8% ROI and a 3.46 Sharpe. All four delivered positive PnL across the cohort.</p>
-        <div class="issue-card-footer">
-          <span class="issue-card-read">12 min read</span>
-          <div class="issue-card-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 3 -->
-      <article class="issue-card" data-category="strategy" data-href="https://alphanet-info.github.io/06-05-event-analysis/">
-        <div class="issue-card-meta">
-          <span class="cat-tag cat-strategy">Strategy Report</span>
-          <span class="issue-card-date">Jun 6, 2026</span>
-        </div>
-        <h3 class="issue-card-title">Privacy Coin Crisis: OptimaShort Stress Test</h3>
-        <p class="issue-card-excerpt">ZEC crashed 56% in two days as a Zcash shielded-pool vulnerability triggered the worst privacy-sector selloff in years. OptimaShort converted the chaos into net profit on both ZEC and XMR.</p>
-        <div class="issue-card-footer">
-          <span class="issue-card-read">10 min read</span>
-          <div class="issue-card-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 4 -->
-      <article class="issue-card" data-category="strategy" data-href="https://alphanet-info.github.io/MarketEventAnalysis/">
-        <div class="issue-card-meta">
-          <span class="cat-tag cat-strategy">Strategy Report</span>
-          <span class="issue-card-date">Jun 5, 2026</span>
-        </div>
-        <h3 class="issue-card-title">Market Dump Response: 6 Strategies, 102 Trades</h3>
-        <p class="issue-card-excerpt">How six Hackworth Prime strategies navigated the June 1–3 downturn. Four posted positive returns — ZEC led at +8.83%, and five strategies went short simultaneously at the cascade.</p>
-        <div class="issue-card-footer">
-          <span class="issue-card-read">14 min read</span>
-          <div class="issue-card-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 5 -->
-      <article class="issue-card" data-category="strategy" data-href="https://alphanet-info.github.io/Newsletter/">
-        <div class="issue-card-meta">
-          <span class="cat-tag cat-strategy">Strategy Report</span>
-          <span class="issue-card-date">Jun 1, 2026</span>
-        </div>
-        <h3 class="issue-card-title">May 2026 Snapshot: Six Spotlight Strategies</h3>
-        <p class="issue-card-excerpt">All six Hackworth spotlight strategies posted positive May returns, led by Prime ZEC at +20.3%. ~1,050 trades executed. A full technical breakdown of the engine architecture behind the results.</p>
-        <div class="issue-card-footer">
-          <span class="issue-card-read">15 min read</span>
-          <div class="issue-card-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </div>
-        </div>
-      </article>
-
+      </aside>
     </div>
   </div>
 </section>
@@ -1293,7 +1553,7 @@ img { max-width: 100%; display: block; }
 // CATEGORY FILTER
 // ============================================
 const filterBtns = document.querySelectorAll('.filter-btn');
-const issueCards = document.querySelectorAll('.issue-card');
+const issueCards = document.querySelectorAll('.blog-card');
 
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -1359,7 +1619,7 @@ function handleSubscribe(form, btnText) {
   });
 }
 
-handleSubscribe(document.getElementById('hero-subscribe'));
+handleSubscribe(document.getElementById('sidebar-subscribe'));
 handleSubscribe(document.getElementById('cta-subscribe'));
 
 // ============================================
