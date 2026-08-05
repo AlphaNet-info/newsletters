@@ -1363,9 +1363,9 @@ img { max-width: 100%; display: block; }
       <div class="blog-main">
         <!-- Filter Bar -->
         <div class="filter-bar" id="categories">
-          <button class="filter-btn active" data-filter="all">All <span class="filter-btn-count">6</span></button>
-          <button class="filter-btn" data-filter="market">Market Brief <span class="filter-btn-count">1</span></button>
-          <button class="filter-btn" data-filter="strategy">Strategy Reports <span class="filter-btn-count">5</span></button>
+          <button class="filter-btn active" data-filter="all">All <span class="filter-btn-count">0</span></button>
+          <button class="filter-btn" data-filter="market">Market Brief <span class="filter-btn-count">0</span></button>
+          <button class="filter-btn" data-filter="strategy">Strategy Reports <span class="filter-btn-count">0</span></button>
         </div>
 
         <!-- Blog Cards -->
@@ -1603,6 +1603,23 @@ img { max-width: 100%; display: block; }
 </footer>
 
 <script>
+// ============================================
+// AUTO-COUNT FILTER BUTTONS
+// ============================================
+const allCards = document.querySelectorAll('.blog-card');
+const counts = { all: allCards.length, market: 0, strategy: 0 };
+allCards.forEach(card => {
+  const cat = card.dataset.category;
+  if (counts[cat] !== undefined) counts[cat]++;
+});
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  const filter = btn.dataset.filter;
+  const countEl = btn.querySelector('.filter-btn-count');
+  if (countEl && counts[filter] !== undefined) {
+    countEl.textContent = counts[filter];
+  }
+});
+
 // ============================================
 // CATEGORY FILTER
 // ============================================
