@@ -928,8 +928,9 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   overflow: hidden;
   min-height: 100%;
-  background-size: cover;
-  background-position: center;
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
   background-color: var(--bg-surface);
 }
 .blog-card-cover::before {
@@ -946,10 +947,7 @@ img { max-width: 100%; display: block; }
   display: none;
 }
 .blog-card-cover[data-cover]:not([data-cover=""])::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(8, 12, 22, 0.15), rgba(8, 12, 22, 0.45));
+  display: none;
 }
 .blog-card-cover-visual {
   position: relative;
