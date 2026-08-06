@@ -1676,7 +1676,7 @@ filterBtns.forEach(btn => {
 issueCards.forEach(card => {
   if (card.dataset.href) {
     card.addEventListener('click', () => {
-      window.open(card.dataset.href, '_blank', 'noopener');
+      window.location.href = card.dataset.href;
     });
   }
 });
